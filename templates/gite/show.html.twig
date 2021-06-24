@@ -1,0 +1,44 @@
+{% extends "base.html.twig" %}
+
+{%block title %}
+	Le gite
+{% endblock %}
+
+{% block body %}
+	<div class="row">
+		<h1>Le gite
+												"{{ gite.name }}"
+		</h1>
+	</div>
+
+	<div class="row">
+		<div class="col-md-6">
+			<table class="table table-striped">
+				<tbody>
+
+					<tr>
+						<th>Surface</th>
+						<td>{{gite.Surface}}
+							m²</td>
+					</tr>
+					<tr>
+						<th>Chambre</th>
+						<td>{{gite.Bedrooms}}</td>
+					</tr>
+					<tr>
+						<th>Animaux</th>
+						{% if gite.animals %}
+							<td>
+								Accepté</td>
+						{% else %}
+							<td>
+								Refusé
+							</td>
+						{% endif %}
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="col-md-6"></div>
+	</div>
+{% endblock %}
