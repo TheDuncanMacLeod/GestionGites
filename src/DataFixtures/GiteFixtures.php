@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Equipement;
 use Faker;
 use App\Entity\Gite;
 use Doctrine\Persistence\ObjectManager;
@@ -12,6 +13,29 @@ class GiteFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
         $faker = Faker\Factory::create('fr_FR');
+        $equipements = [];
+
+        $eq1 = new Equipement();
+        $eq1->setName('Piscine');
+
+        $eq2 = new Equipement();
+        $eq2->setName('Sauna');
+
+        $eq3 = new Equipement();
+        $eq3->setName('Jardin');
+
+        $eq4 = new Equipement();
+        $eq4->setName('Lave linge');
+
+        array_push($equipements, $eq1, $eq2, $eq3, $eq4);
+
+        $manager->persist($eq1);
+        $manager->persist($eq2);
+        $manager->persist($eq3);
+        $manager->persist($eq4);
+
+        $manager->flush();
+        
 
         for ($i=0; $i <= 150; $i++) { 
             $gite = new Gite();
@@ -24,6 +48,7 @@ class GiteFixtures extends Fixture
                 ->setCity($faker->city())
                 ->setPostalCode($faker->numberBetween(10000,96000))
                 ->setAnimals($faker->boolean())
+                ->addEquipement($faker->randomElement($equipements))
                 ->setCreatedAt($faker->dateTimeThisYear('now', 'Europe/Paris'));
 
                 $manager->persist($gite);

@@ -2,13 +2,16 @@
 
 namespace App\Form;
 
+use App\Entity\Equipement;
 use App\Entity\Gite;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class GiteType extends AbstractType
@@ -23,7 +26,7 @@ class GiteType extends AbstractType
                     'required' => false,
                     'label' => 'Nom du gite',
                     'attr' => [
-                        'placeholder' => 'Entrer le nom du gite',
+                        'placeholder' => 'Entrer le nom du gite'
                     ]
                 ]
             )
@@ -34,7 +37,7 @@ class GiteType extends AbstractType
                     'required' => false,
                     'label' => 'Description du gite',
                     'attr' => [
-                        'placeholder' => 'Entrer une description du gite',
+                        'placeholder' => 'Entrer une description du gite'
                     ]
                 ]
             )
@@ -45,7 +48,7 @@ class GiteType extends AbstractType
                     'required' => false,
                     'label' => 'Surface',
                     'attr' => [
-                        'placeholder' => 'Entrer la surface du gite',
+                        'placeholder' => 'Entrer la surface du gite'
                     ]
                 ]
             )
@@ -56,7 +59,7 @@ class GiteType extends AbstractType
                     'required' => false,
                     'label' => 'Nombre de chambres',
                     'attr' => [
-                        'placeholder' => 'Entrer le nombre de chambres',
+                        'placeholder' => 'Entrer le nombre de chambres'
                     ]
                 ]
             )
@@ -67,7 +70,7 @@ class GiteType extends AbstractType
                     'required' => false,
                     'label' => 'Adresse du gite',
                     'attr' => [
-                        'placeholder' => 'Entrer l\'adresse du gite',
+                        'placeholder' => 'Entrer l\'adresse du gite'
                     ]
                 ]
             )
@@ -78,7 +81,7 @@ class GiteType extends AbstractType
                     'required' => false,
                     'label' => 'Ville',
                     'attr' => [
-                        'placeholder' => 'Entrer le nom de la ville',
+                        'placeholder' => 'Entrer le nom de la ville'
                     ]
                 ]
             )
@@ -89,7 +92,7 @@ class GiteType extends AbstractType
                     'required' => false,
                     'label' => 'Code postal',
                     'attr' => [
-                        'placeholder' => 'Entrer le code postal',
+                        'placeholder' => 'Entrer le code postal'
                     ]
                 ]
             )
@@ -98,7 +101,16 @@ class GiteType extends AbstractType
                 CheckboxType::class,
                 [
                     'required' => false,
-                    'label' => 'Animaux accepté',
+                    'label' => 'Animaux accepté'
+                ]
+            )
+            ->add(
+                'Equipements',
+                EntityType::class,
+                [
+                    'class' => Equipement::class,
+                    'choice_label' => 'name',
+                    'multiple' => true
                 ]
             );
     }
