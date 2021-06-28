@@ -15,7 +15,6 @@
 		<div class="col-md-6">
 			<table class="table table-striped">
 				<tbody>
-
 					<tr>
 						<th>Surface</th>
 						<td>{{gite.Surface}}
@@ -35,6 +34,14 @@
 								Refusé
 							</td>
 						{% endif %}
+					</tr>
+					<tr>
+						<th>Equipements</th>
+						<td>
+							{% for eq in gite.equipements %}
+								<li>{{ eq.name }}</li>
+							{% endfor %}
+						</td>
 					</tr>
 				</tbody>
 			</table>
