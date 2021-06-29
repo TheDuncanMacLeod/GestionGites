@@ -1,0 +1,44 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+	Editer un Gite
+{% endblock %}
+
+{% block body %}
+
+	<div class="row">
+		<h1>
+			Editer un Gite PROGICA</h1>
+	</div>
+	{{ form_start(formGite) }}
+	<div class="row">
+		<div class="col-md-8">
+			{{form_row(formGite.Name)}}
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-8">
+			{{ form_row(formGite.Description) }}
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-4">{{ form_row(formGite.Surface) }}</div>
+		<div class="col-md-4">{{ form_row(formGite.Bedrooms) }}</div>
+        <div class="col-md-4">{{form_row(formGite.imageFile)}}</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-4">{{ form_row(formGite.Adress) }}</div>
+		<div class="col-md-4">{{ form_row(formGite.City) }}</div>
+		<div class="col-md-4">{{ form_row(formGite.Postal_code) }}</div>
+	</div>
+	<div class="row">
+		<div class="col-md-4">{{ form_row(formGite.Animals) }}</div>
+		<div class="col-md-6">
+			{{ form_row(formGite.Equipements) }}
+		</div>
+	</div>
+    </br>
+    <input type="submit" value="Editer" class="btn btn-primary">
+	{{ form_end(formGite) }}
+{% endblock %}

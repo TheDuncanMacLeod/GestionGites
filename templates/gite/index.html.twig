@@ -8,6 +8,28 @@
 
 	<h1>Les gites disponibles</h1>
 
+	<div class="row mt-3 mb-3">
+		{{form_start(form)}}
+		<div class="form-control">
+			<div class="col-md-4">
+				{{form_row(form.minSurface)}}
+			</div>
+			<div class="col-md-4">
+				{{form_row(form.maxBedrooms)}}
+			</div>
+			<div class="col-md-4">
+				{{form_row(form.findCity)}}
+			</div>
+			<div class="col-md-4">
+				{{form_row(form.AcceptAnimals)}}
+			</div>
+			<div class="col-md-4 mt-3 mb-3">
+				{{form_row(form.submit)}}
+			</div>
+		</div>
+			{{form_end(form)}}
+	</div>
+
 	<div class="row">
 		{% for gite in gites %}
 			<div class="col-md-4">
@@ -16,7 +38,15 @@
 						<h5 class="card-title">{{ gite.name }}</h5>
 						<h5 class="card-title">{{ gite.id }}</h5>
 						<h6 class="card-subtitle mb-2 text-muted">{{ gite.createdAt|format_datetime()}}</h6>
-						<p class="card-text flex-grow-1">{{gite.description}}</p>
+						<p class="card-text flex-grow-1">
+						{{gite.description}}
+						<h6 class="card-subtitle mb-2 text-muted">
+						Surface : {{gite.Surface}} </br>
+						Bedrooms : {{gite.BedRooms}} </br>
+						Ville : {{gite.City}} </br>
+						Annimaux acceptés : {{ (gite.Animals) ? 'oui' : 'non' }}
+						</h6>
+						</p>
 						<a class="btn btn-secondary" href="{{ path('gite.show', {'id' : gite.id})}}">Voir le gite
 						</a>
 					</div>
