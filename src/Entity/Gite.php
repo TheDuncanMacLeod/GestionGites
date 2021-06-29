@@ -6,14 +6,18 @@ use App\Entity\Equipement;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\GiteRepository;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\HttpFoundation\File\File;
 use Doctrine\Common\Collections\ArrayCollection;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Constraints as Assert;
+
 
 
 
 
 /**
  * @ORM\Entity(repositoryClass=GiteRepository::class)
+ * @Vich\Uploadable
  */
 class Gite
 {
@@ -35,7 +39,7 @@ class Gite
      * @Assert\NotBlank()
      * @Assert\Length(
      *          min=5,
-     *          max=30
+     *          max=500
      * )
      */
     private $Description;
@@ -88,6 +92,19 @@ class Gite
      * @ORM\ManyToMany(targetEntity=Equipement::class, inversedBy="gites")
      */
     private $equipements;
+
+
+    /**
+     *@var File|null
+     * @Vich\UploadableField(mapping="gite_image", fileNameProperty="imageName", size="imageSize")
+     */
+    private $imageFile;
+
+   /**
+     *@var string|null
+     * @ORM\Column(type="string", length=255)
+     */
+    private $imageName;
 
     public function __construct()
     {
@@ -233,5 +250,45 @@ class Gite
         return $this;
     }
 
+
+    /**
+     * Get *@var File|null
+     */ 
+    public function getImageFile()
+    {
+        return $this->imageFile;
+    }
+
+    /**
+     * Set *@var File|null
+     *
+     * @return  self
+     */ 
+    public function setImageFile($imageFile)
+    {
+        $this->imageFile = $imageFile;
+
+        return $this;
+    }
+
+    /**
+     * Get *@var string|null
+     */ 
+    public function getImageName()
+    {
+        return $this->imageName;
+    }
+
+    /**
+     * Set *@var string|null
+     *
+     * @return  self
+     */ 
+    public function setImageName($imageName)
+    {
+        $this->imageName = $imageName;
+
+        return $this;
+    }
 }
 

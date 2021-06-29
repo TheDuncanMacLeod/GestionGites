@@ -56,6 +56,28 @@ class AdminController extends AbstractController {
             "formGite" => $form->createView()
         ]);
     }
+     /**
+     * @Route("/admin/editGite/{id}", name="admin.edit")
+     */
+    public function edit(int $id,Request $request)
+    {
+        $gite = $this->giteRepository->find($id);
+        $form = $this->createForm(GiteType::class, $gite);
+        $form->handleRequest($request);
+        // dd($id);
+        if($form->isSubmitted() && $form->isValid() )
+        {
+            $this->em->persist($gite);
+            $this->em->flush();
+            $this->addFlash("success", "Le Gite a bien été édité");
+            return $this->redirectToRoute('admin.index');
+        }
+
+        return $this->render('admin/edit.html.twig',[
+            "formGite" => $form->createView()
+        ]);
+        
+    }
 
 }
 

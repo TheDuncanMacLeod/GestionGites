@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Gite;
+use App\Entity\GiteSearch;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -29,10 +30,39 @@ class GiteRepository extends ServiceEntityRepository
             ->orderBy('g.Created_at', 'DESC')
             ->setMaxResults(9)
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
-    
+
+
+    public function findAllGiteSearch(GiteSearch $search): array
+    {
+        $query = $this->createQueryBuilder('g');
+
+        if ($search->getMinSurface()) {
+            $query = $query
+                ->andWhere('g.Surface > :minSurface')
+                ->setParameter('minSurface', $search->getMinSurface());
+        }
+
+        if ($search->getMaxBedrooms()) {
+            $query = $query
+                ->andWhere('g.Bedrooms < :maxBedrooms')
+                ->setParameter('maxBedrooms', $search->getMaxBedrooms());
+        }
+        if ($search->getfindCity()) {
+            $query = $query
+                ->andWhere('g.City = :findCity')
+                ->setParameter('findCity', $search->getfindCity());
+        }
+        if ($search->getAcceptAnimals()) {
+            $query = $query
+                ->andWhere('g.Animals = :AcceptAnimals')
+                ->setParameter('AcceptAnimals', $search->getAcceptAnimals());
+        }
+
+        return $query->getQuery()->getResult();
+    }
+
 
     /*
     public function findOneBySomeField($value): ?Gite
