@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\File\File;
 use Doctrine\Common\Collections\ArrayCollection;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 
 
@@ -96,7 +97,7 @@ class Gite
 
     /**
      *@var File|null
-     * @Vich\UploadableField(mapping="gite_image", fileNameProperty="imageName", size="imageSize")
+     * @Vich\UploadableField(mapping="gite_image", fileNameProperty="imageName")
      */
     private $imageFile;
 
@@ -105,6 +106,11 @@ class Gite
      * @ORM\Column(type="string", length=255)
      */
     private $imageName;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $updated_at;
 
     public function __construct()
     {
@@ -268,6 +274,10 @@ class Gite
     {
         $this->imageFile = $imageFile;
 
+        if ($this->imageFile instanceof UploadedFile) {
+            $this->updated_at = new \DateTime('now');
+        }
+
         return $this;
     }
 
@@ -290,5 +300,18 @@ class Gite
 
         return $this;
     }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updated_at;
+    }
+
+    public function setUpdatedAt(\DateTimeInterface $updated_at): self
+    {
+        $this->updated_at = $updated_at;
+
+        return $this;
+    }
 }
+
 

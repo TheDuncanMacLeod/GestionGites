@@ -4,9 +4,13 @@ vich_uploader:
     mappings:
         gite_image:
             uri_prefix: /images/gites
-            upload_destination: '%kernel.project_dir%/public/images/'
+            upload_destination: '%kernel.project_dir%/public/images/gites'
+            namer:
+                service: Vich\UploaderBundle\Naming\HashNamer
+                options: { algorithm: 'sha256', length: 50 }
 
     #mappings:
     #    products:
     #        uri_prefix: /images/products
     #        upload_destination: '%kernel.project_dir%/public/images/products'
+    
