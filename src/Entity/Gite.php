@@ -98,6 +98,10 @@ class Gite
     /**
      *@var File|null
      * @Vich\UploadableField(mapping="gite_image", fileNameProperty="imageName")
+     * @Assert\Image(
+     *          mimeTypes="image/jpeg",
+     *          mimeTypesMessage="L'image doit être au format jpeg"
+     *)
      */
     private $imageFile;
 

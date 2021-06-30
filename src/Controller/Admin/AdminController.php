@@ -67,7 +67,7 @@ class AdminController extends AbstractController {
         // dd($id);
         if($form->isSubmitted() && $form->isValid() )
         {
-            $this->em->persist($gite);
+           // $this->em->persist($gite);
             $this->em->flush();
             $this->addFlash("success", "Le Gite a bien été édité");
             return $this->redirectToRoute('admin.index');
