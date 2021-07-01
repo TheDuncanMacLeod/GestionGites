@@ -96,8 +96,9 @@ class Gite
 
 
     /**
-     *@var File|null
+     * @var File|null
      * @Vich\UploadableField(mapping="gite_image", fileNameProperty="imageName")
+     * @Assert\NotBlank(message="selectionnez une image svp!")
      * @Assert\Image(
      *          mimeTypes="image/jpeg",
      *          mimeTypesMessage="L'image doit être au format jpeg"
@@ -107,7 +108,7 @@ class Gite
 
    /**
      *@var string|null
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $imageName;
 

@@ -4,6 +4,7 @@ namespace App\Controller\Gite;
 
 use App\Entity\Gite;
 use App\Entity\GiteSearch;
+use App\Form\ContactType;
 use App\Form\GiteSearchType;
 use App\Repository\GiteRepository;
 use Symfony\Component\HttpFoundation\Request;
@@ -57,9 +58,10 @@ class GiteController extends AbstractController
     {
         $gite = $this->giteRepository->find($id);
         // dd($id);
-
+        $form = $this->createForm(ContactType::class);
         return $this->render('gite/show.html.twig', [
-            "gite" => $gite
+            "gite" => $gite,
+            "form" => $form->createView()
         ]);
     }
 }

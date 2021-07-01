@@ -5,47 +5,60 @@
 {% endblock %}
 
 {% block body %}
-	<div class="row">
-		<h1>Le gite
-												"{{ gite.name }}"
-		</h1>
+
+	<div class="card" style="width: 100%">
+		{% if gite.imageName %}
+			<img src="{{vich_uploader_asset(gite,'imageFile')}}" class="img-thumbnail" alt="" style="width: 25%">
+		{% else %}
+			<img src="images/img/default_housepict.jpg" class="img-thumbnail" alt="" style="width:25%">
+		{% endif %}
+		<div class="card-body">
+			<h5 class="card-title">Le gite
+				{{ gite.name }}</h5>
+			<p class="card-text">{{gite.description}}</p>
+			<a href="#" class="btn btn-primary">Contact</a>
+			{{ form_start(form) }}
+				{{ form_rest(form) }}
+				<button type="submit">Envoyer</button>
+			{{ form_end(form) }}
+		</div>
+		<div class="container-fluid">
+			<div class="col-md-6">
+				<table class="table table-striped">
+					<tbody>
+						<tr>
+							<th>Surface</th>
+							<td>{{gite.Surface}}
+								m²</td>
+						</tr>
+						<tr>
+							<th>Chambre</th>
+							<td>{{gite.Bedrooms}}</td>
+						</tr>
+						<tr>
+							<th>Animaux</th>
+							{% if gite.animals %}
+								<td>
+									Accepté</td>
+							{% else %}
+								<td>
+									Refusé
+								</td>
+							{% endif %}
+						</tr>
+						<tr>
+							<th>Equipements</th>
+							<td>
+								{% for eq in gite.equipements %}
+									<li>{{ eq.name }}</li>
+								{% endfor %}
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="col-md-6"></div>
+		</div>
 	</div>
 
-	<div class="row">
-		<div class="col-md-6">
-			<table class="table table-striped">
-				<tbody>
-					<tr>
-						<th>Surface</th>
-						<td>{{gite.Surface}}
-							m²</td>
-					</tr>
-					<tr>
-						<th>Chambre</th>
-						<td>{{gite.Bedrooms}}</td>
-					</tr>
-					<tr>
-						<th>Animaux</th>
-						{% if gite.animals %}
-							<td>
-								Accepté</td>
-						{% else %}
-							<td>
-								Refusé
-							</td>
-						{% endif %}
-					</tr>
-					<tr>
-						<th>Equipements</th>
-						<td>
-							{% for eq in gite.equipements %}
-								<li>{{ eq.name }}</li>
-							{% endfor %}
-						</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-		<div class="col-md-6"></div>
-	</div>
 {% endblock %}
