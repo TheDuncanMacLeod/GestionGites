@@ -37,6 +37,8 @@ class Contact
     */
     private string $message;
 
+    private Gite $gite;
+
     /**
      * Get the value of firstname
      */ 
@@ -133,6 +135,26 @@ class Contact
     public function setMessage($message)
     {
         $this->message = $message;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of gite
+     */ 
+    public function getGite()
+    {
+        return $this->gite;
+    }
+
+    /**
+     * Set the value of gite
+     *
+     * @return  self
+     */ 
+    public function setGite(Gite $gite)
+    {
+        $this->gite = $gite;
 
         return $this;
     }
